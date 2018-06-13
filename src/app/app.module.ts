@@ -7,23 +7,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { PostsModule } from './posts/posts.module';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: '', redirectTo: '/blog', pathMatch: 'full' },
+  { path: '', loadChildren: './posts/posts.module#PostsModule' }
+];
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     CoreModule,
     SharedModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PostsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
