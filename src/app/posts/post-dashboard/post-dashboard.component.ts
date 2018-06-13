@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-dashboard',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
   }
